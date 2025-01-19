@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+// Check if character is a delimiter
+bool isDelimiter(char ch) {
+    if (ch == ' ' || ch == '+' || ch == '-' || ch == ',' || ch == ';' || ch == ':' ||
+        ch == '>' || ch == '<' || ch == '{' || ch == '}' || ch == '[' || ch == ']' ||
+        ch == '^' || ch == '.') {
+        return true;
+    }
+    return false;
+}
+
+// Check if character is an operator
+bool isOperator(char ch) {
+    if (ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '%') {
+        return true;
+    }
+    return false;
+}
+
+// Check if string is a valid identifier
+bool validIdentifier(char* str) {
+    if (isdigit(str[0]) || isDelimiter(str[0])) {
+        return false;
+    }
+    return true;
+}
+
+// Check if string is a keyword
+bool isKeyword(char* str) {
+    if (!strcmp(str, "if") || !strcmp(str, "else") || !strcmp(str, "break") ||
+        !strcmp(str, "case") || !strcmp(str, "char") || !strcmp(str, "const") ||
+        !strcmp(str, "continue") || !strcmp(str, "default")) {
+        return true;
+    }
+    return false;
+}
+
+int main() {
+    char str[100];
+    printf("Enter the line of code: \n");
+    scanf(" %[^\n]", str);  // Reads the entire line of input
+
+    char* token = strtok(str, " ");  // Tokenize the input by spaces
+    while (token != NULL) {
+        printf("Token: %s\n", token);
+
+        // Check if the token is a keyword
+        if (isKeyword(token)) {
+            printf("'%s' is a keyword.\n", token);
+        }
+        // Check if the token is a valid identifier
+        else if (validIdentifier(token)) {
+            printf("'%s' is a valid identifier.\n", token);
+        } else {
+            printf("'%s' is not a valid identifier.\n", token);
+        }
+
+        // Check if the token contains an operator
+        for (int i = 0; i < strlen(token); i++) {
+            if (isOperator(token[i])) {
+                printf("'%c' is an operator.\n", token[i]);
+            }
+        }
+
+        token = strtok(NULL, " ");  // Get the next token
+    }
+
+    return 0;
+}
