@@ -56,22 +56,18 @@ int main()
     scanf("%[^\n]", str);
 
 
+    printf("Output: \n");
     bool deli = isDelimiter(str);
-    //printf("Delimiter is: %d\n", str);
     printf("Delimiter: %d\n", deli);
 
     bool operat = isOperator(str);
-    //printf("Operator is: %d\n", str);
     printf("Operator: %d\n", operat);
 
     bool valid = isValidIdentifier(&str);
-    //printf("Identifier/Operator is: %d\n", str);
     printf("Identifier/Operator: %d\n", valid);
 
     bool keywd = isKeyword(&str);
-   //printf("Keyword is: %d\n", str);
     printf("Keyword: %d\n", keywd);
+
     return 0;
 }
-
-//TASK for the Next Class ==> Complete the code with proper understanding
