@@ -3,6 +3,7 @@
 #include<string.h>
 #include<stdlib.h>
 
+
 //check is Delimiter
 bool isDelimiter(char ch){
     if(ch == ' ' || ch == ',' || ch == ';' || ch == ':' || ch == '(' || ch == ')' || ch == '{' || ch == '}' ||
@@ -21,7 +22,7 @@ bool isOperator(char ch){
        ch== '==' || ch== '!=' || ch == '&&'|| ch == '||' || ch == '!' || ch == '&' || ch == '^' || ch == '~' ||
        ch == '<<' || ch== '>>' || ch== '=' || ch== '+=' || ch== '-=' || ch== '*=' || ch== '/=')
        {
-            return true;
+        return true;
     }
      return false;
 }
@@ -30,9 +31,9 @@ bool isValidIdentifier(char* str){
     if(str[0]=='0'||str[0]=='1'||str[0]=='2'||str[0]=='3'||str[0]=='4'||str[0]=='5'||str[0]=='6'||str[0]=='7'
        ||str[0]=='8'||str[0]=='9' || str[0]=='_' || isDelimiter(str[0])==true)
        {
-            return true;
+            return false;
        }
-	return false;
+        return true;
 }
 //check keywords
 bool isKeyword(char* str){
@@ -47,6 +48,25 @@ bool isKeyword(char* str){
            return true;
        }
        return false;
+}
+//check if the value is Integer - 22nd January, 2-25
+bool isInteger(char* str){
+    int i=0, len = strlen(str);
+    if(len==0){
+       return false;
+    }
+
+    if(str[0] == '-'){
+        i = 1;
+    }
+
+    for(; i<len; i++){
+        if(str[i]!='0' && str[i]!='1' && str[i]!='2' && str[i]!='3' && str[i]!='4'
+        && str[i]!='5' && str[i]!='6' && str[i]!='7' && str[i]!='8' && str[i]!='9'){
+            return false;
+        }
+    }
+    return true;
 }
 
 int main()
@@ -68,6 +88,9 @@ int main()
 
     bool keywd = isKeyword(&str);
     printf("Keyword: %d\n", keywd);
+
+    bool isInt = isInteger(&str);
+    printf("Integer: %d\n", isInt);
 
     return 0;
 }
