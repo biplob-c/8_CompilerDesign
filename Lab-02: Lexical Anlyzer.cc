@@ -69,6 +69,29 @@ bool isInteger(char* str){
     return true;
 }
 
+//Check if it is Real Number (Factorial)
+bool isRealNumber(char* str){
+    int i, len = strlen(str);
+    bool hasDecimal = false;
+    if(len == 0){
+        return false;
+    }
+
+    if(str[0]=='-'){
+        i=1;
+    }
+    for(; i<len; i++){
+        if(str[i]!='0' && str[i]!='1' && str[i]!='2' && str[i]!='3' && str[i]!='4'
+        && str[i]!='5' && str[i]!='6' && str[i]!='7' && str[i]!='8' && str[i]!='9' && str[i]!='.'){
+            return false;
+        }
+        if(str[i]=='.'){
+            hasDecimal = true;
+        }
+    }
+    return hasDecimal;
+}
+
 int main()
 {
     char str[100];
@@ -92,5 +115,7 @@ int main()
     bool isInt = isInteger(&str);
     printf("Integer: %d\n", isInt);
 
+    bool isReal = isRealNumber(&str);
+    printf("Real Number is: %d\n", isReal);
     return 0;
 }
