@@ -5,6 +5,7 @@
 
 
 //check is Delimiter
+//delimiter is a sequence of one or more characters used to specify the boundary between separate, independent regions in plain text
 bool isDelimiter(char ch){
     if(ch == ' ' || ch == ',' || ch == ';' || ch == ':' || ch == '(' || ch == ')' || ch == '{' || ch == '}' ||
     ch == '[' || ch == ']' || ch == '"' || ch == '#' ||ch == '+' || ch == '-'|| ch== '*' || ch== '/'|| ch== '%'||
@@ -27,6 +28,7 @@ bool isOperator(char ch){
      return false;
 }
 //check is valid or not
+//an identifier is a name given to a programming element, such as a variable, function, class, or module. 
 bool isValidIdentifier(char* str){
     if(str[0]=='0'||str[0]=='1'||str[0]=='2'||str[0]=='3'||str[0]=='4'||str[0]=='5'||str[0]=='6'||str[0]=='7'
        ||str[0]=='8'||str[0]=='9' || str[0]=='_' || isDelimiter(str[0])==true)
@@ -55,7 +57,6 @@ bool isInteger(char* str){
     if(len==0){
        return false;
     }
-
     if(str[0] == '-'){
         i = 1;
     }
