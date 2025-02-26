@@ -1,0 +1,129 @@
+#include<stdio.h>
+#include<stdbool.h>
+#include<stdlib.h>
+#include<string.h>
+#include<ctype.h>
+
+bool isDelimiter(char ch){
+    if (ch == ' ' || ch == ',' || ch == ';' || ch == ':' ||
+        ch == '(' || ch == ')' || ch == '{' || ch == '}' ||
+        ch == '[' || ch == ']' || ch == '"' || ch == '#' ||
+        ch == '+' || ch == '-' || ch == '*' || ch == '/' ||
+        ch == '%' || ch == '<' || ch == '>' || ch == '=' ||
+        ch == '!' || ch == '&' || ch == '|' || ch == '^' ||
+        ch == '~' || ch == '.') {
+        return true;
+    }
+    return false;
+}
+bool isOperator(char ch){
+    if(ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '%' || ch == '==' || ch == '>=' || ch == '<=' ||
+       ch == '>' || ch == '<' || ch == '||' || ch == '!=' || ch == '=' || ch == '&&' || ch == '!' || ch == '^' ||
+       ch == '~' || ch == '<<' || ch == '>>' || ch == '+=' || ch == '-=' || ch == '*=' || ch == '/='){
+            return true;
+       }
+       return false;
+}
+bool isValidIdentifier(char* str){
+    if(str[0]=='0' || str[0]=='1' || str[2]=='3' || str[0]=='4' || str[0]=='5' || str[0]=='6' || str[0]=='7'||
+       str[0]=='8' || str[0]=='9' || str[0]=='_' || isDelimiter(str[0])==true){
+        return false;
+       }
+       return true;
+}
+bool isKeyword(const char* str) {
+    // List of C keywords
+    const char* keywords[] = {
+        "auto", "break", "case", "char", "const", "continue", "default",
+        "do", "double", "else", "enum", "extern", "float", "for", "goto",
+        "if", "inline", "int", "long", "register", "return", "short",
+        "signed", "sizeof", "static", "struct", "switch", "typedef",
+        "union", "unsigned", "void", "volatile", "while"
+    };
+    // Number of keywords in the array
+    int No_Keywords = sizeof(keywords)/sizeof(keywords[0]);
+    // Check if the input string matches any keyword
+    for(int i = 0; i < No_Keywords; i++) {
+        if (strcmp(str, keywords[i]) == 0) {
+            return true;
+        }
+    }
+
+    return false;
+}
+//check if the value is Integer - 22nd January, 2-25
+bool isInteger(char* str){
+    int i=0;
+    int len = strlen(str);
+    if(len==0){
+       return false;
+    }
+    if(str[0] == '-'){
+        i = 1;
+    }
+
+    for(; i<len; i++){
+        if(str[i]!='0' && str[i]!='1' && str[i]!='2' && str[i]!='3' && str[i]!='4'
+        && str[i]!='5' && str[i]!='6' && str[i]!='7' && str[i]!='8' && str[i]!='9'){
+            return false;
+        }
+    }
+    return true;
+}
+
+//Check if it is Real Number (Factorial)
+bool isRealNumber(char* str){
+    int i;
+    int len = strlen(str);
+    bool hasDecimal = false;
+    if(len == 0){
+        return false;
+    }
+
+    if(str[0]=='-'){
+        i=1;
+        if(len==1){
+            return false;//invalid if length = 1
+        }
+    }
+    //check each character
+    for(; i<len; i++){
+        if(str[i]=='.'){
+            hasDecimal = true;
+            break;
+        }
+    }
+    if(hasDecimal == true){
+        return true;
+    }
+    else
+        return false;
+
+}
+
+int main(){
+    char str[100];
+    printf("Enter the line of the code: \n");
+    scanf("%[^\n]", str);
+
+    printf("Output: \n");
+    bool deli = isDelimiter(str[0]);
+    printf("1. Delimiter: %d\n", deli);
+
+    bool op = isOperator(str[0]);
+    printf("2. Operator: %d\n", op);
+
+    bool identi = isValidIdentifier(str);
+    printf("3. Valid Identifier: %d\n", identi);
+
+    bool keywd = isKeyword(str);
+    printf("4. Keyword: %d\n", keywd);
+
+    bool integ = isInteger(str);
+    printf("5. Integer: %d\n", integ);
+
+    bool realNo = isRealNumber(str);
+    printf("5. Real Number: %d\n", realNo);
+
+    return 0;
+}
