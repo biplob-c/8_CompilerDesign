@@ -117,4 +117,9 @@ For {"1", "2", "3", "+", "4", "-", "*"}:
 * → 1 * 1 = 1 → Stack: [1]
 
 Returns 1.
+...................................
+Key Takeaways
+Postfix evaluation uses a stack to store operands.
+When an operator is encountered, the top two operands are popped, computed, and the result is pushed back.
+The final result is the only remaining element in the stack.
 */
